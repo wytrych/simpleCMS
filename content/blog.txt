@@ -1,0 +1,5 @@
+@;1;2000-01-01;Start your blog!
+
+No posts written !s yet!.
+
+@;-1;
