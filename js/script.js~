@@ -131,7 +131,7 @@ return {
 		$$("par"+co).appendChild(para);
 		location.hash = "#here";
 	},
-	xmlhttp: ((window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"))
+	xmlhttp: (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
 }
 
 }();
