@@ -13,9 +13,9 @@
 <main class="content">
 
 	<?php
-include("./modules/PostLoader.inc");
-include("./modules/NavGenerator.inc");
-include("./modules/Init.inc");
+include("./modules/PostLoader.php");
+include("./modules/NavGenerator.php");
+include("./modules/Init.php");
 
 Init::start();
 
