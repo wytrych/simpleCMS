@@ -10,6 +10,7 @@
 
 <body>
 <div class="bg">&lt;/</div>
+
 <main class="content">
 
 <?php
@@ -21,6 +22,17 @@ $loginDialog = false;
 if (isset($_GET['secretCode']) && intval($_GET['secretCode'])===intval(date('dmy'))) {
 	$loginDialog = true;
 }
+
+/*if ($loginDialog) {
+?>
+
+<div class="post" id="newPost">
+<p class="date" style="display:none"></p>
+<article><p class="addNew"><a href="#0" onclick="admin.edit('newPost')">Add new</a></p></article>
+</div>
+
+<?php
+}*/
 
 include("./modules/PostLoader.php");
 include("./modules/NavGenerator.php");
@@ -36,7 +48,10 @@ echo $content;
 
 ?>
 </main>
-<?php
+<script>
+var wholefile = <?php echo(json_encode(array($postLoader->wholefile)));?>[0].split("@");
+</script><?php
+
 
 if ($loginDialog) {
 ?>

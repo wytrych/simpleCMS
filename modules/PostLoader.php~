@@ -199,7 +199,7 @@ EOD;
 		}
 
 		if ($lineCount < 2)
-			$finalOutput = "<div class=\"post\"><article><p class=\"date\" style=\"display:none\"></p><h1>The blog file does not have any content!</h1></article></div>";
+			$finalOutput = "<div class=\"post\"><article><h1>The blog file does not have any content!</h1></article></div>";
 
 		return $finalOutput;
 	}

@@ -4,6 +4,8 @@ var el = document.querySelectorAll(".post");
 var list = {};
 var listNodes = [];
 var ktoryPost;
+	
+var xmlhttp = ((window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"));
 
 for (var i=0;i<el.length;i++) {
 	list[el[i].id] = false;
@@ -130,8 +132,7 @@ return {
 		para.innerHTML = "<p id=\"here\" class=\"com\"><input type=\"text\" id=\"author"+co+"\" placeholder=\"Your name\"></input><br /><textarea rows=\"5\" cols=\"20\" id=\"text"+co+"\" placeholder=\"Your comment\"></textarea><br /><span class=\"button\" onclick=\"wyslij("+co+")\">Post comment</span></p>";
 		$$("par"+co).appendChild(para);
 		location.hash = "#here";
-	},
-	xmlhttp: ((window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"))
+	}
 }
 
 }();
