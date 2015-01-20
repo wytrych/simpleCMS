@@ -183,8 +183,11 @@ EOD;
 
 				} else if ($len > 1 && $buffer[1]==="c") {
 
-					while (($buffer = fgets($file)) !== false && $buffer[0]!=="!") 
+					while (($buffer = fgets($file)) !== false && $buffer[0]!=="!") {
 						$output .= $buffer;
+						$this->wholefile .= $buffer;
+					}
+					$this->wholefile .= $buffer;
 	
 					$output = mb_ereg_replace("<","&lt;",$output);
 					$output = mb_ereg_replace(">","&gt;",$output);

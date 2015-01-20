@@ -1,1 +1,19 @@
 This is a simple Content Management System.
+
+v0.1
+
+Features:
+
+* Blog posting system with a super-simple markup language
+* A commenting system
+* Admin panel for adding/deleting posts
+
+Not yet there:
+
+* Editing/deleting comments
+* Presentation/templating system
+* Security
+* Markup safety callbacks - can crash from markup mistakes
+* File drag'n'drop
+* A little bit better file/class organisation
+* And many more...

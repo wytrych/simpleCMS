@@ -13,16 +13,8 @@ class Init {
 			fclose($file);
 		}
 
-		if (!file_exists("./content/blog.txt")) {
-			$init = "@;1;2000-01-01;Start your blog!\n\n"
-				."No posts written !s yet!.\n\n"
-				."@;-1;";
-
-			$file = fopen("./content/blog.txt","w");
-			if ($file)
-				fwrite($file,$init);
-			fclose($file);
-		}
+		if (!file_exists("./content/blog.txt")) 
+			copy("./content/example.txt","./content/blog.txt");
 
 	}
 }

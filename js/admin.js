@@ -6,6 +6,11 @@ var admin = function(){
 
 	var postCount;
 
+	document.querySelector(".login").onkeypress = function(e) {
+		if (e.keyCode === 13)
+			admin.verify();
+	}
+
 	function addEditLink() {
 		var posts = document.querySelectorAll(".post");
 		for (var i = 0; i<posts.length; i++) {
@@ -71,6 +76,7 @@ var admin = function(){
 
 		}
 		postCount = content[content.length-1].split(";")[2];
+
 
 	}
 
@@ -140,7 +146,10 @@ var admin = function(){
 			else
 				content = {title: "Type the title here",article: "Type in some content"};
 
-			co.querySelector("article").innerHTML ="<form id=\"edit\"><b class=\"inputDesc\">Title:</b><input type=\"text\" id=\"postTitle\" value=\""+content.title+"\" /><br />"
+			article = co.querySelector("article");
+			article.style.maxHeight = "200em";
+
+			article.innerHTML ="<form id=\"edit\"><b class=\"inputDesc\">Title:</b><input type=\"text\" id=\"postTitle\" value=\""+content.title+"\" /><br />"
 				+ "<textarea style=\"width:80%;height:20em\">"+content.article+"</textarea><br />"
 				+ "<input type=\"hidden\" id=\"postId\" value=\""+co.id+"\" />"
 				+ "<input type=\"button\" value=\"Save changes\" onclick=\"admin.send()\" /></form>";

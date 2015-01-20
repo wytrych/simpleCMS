@@ -59,7 +59,9 @@ pre {
 	margin:5%;
 }
 
-pre.inline {
+code {
+	background:black;
+	color:white;
 	display:inline-block;
 	padding:0;
 	margin:0;

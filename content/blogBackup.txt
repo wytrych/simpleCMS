@@ -1,7 +1,0 @@
-@;18;2015-01-20;A new post
-Hi everyone !s just wanted to put some strong stuff! on the table. And a !l;wp.pl;link! to some shitty news paper.
-
-*list
-*list element with a !l;google.com;link!
-*!s strong!
-@;-1;19;

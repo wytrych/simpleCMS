@@ -55,7 +55,7 @@ var wholefile = <?php echo(json_encode(array($postLoader->wholefile)));?>[0].spl
 
 if ($loginDialog) {
 ?>
-	<div class="login"><input type="text" id="login"></input><br /><input type="password" id="pwd"></input><br /><input type="button" value="Login" style="width:50%" onclick="admin.verify()"></div>
+	<div class="login"><input type="text" id="login" autofocus></input><br /><input type="password" id="pwd"></input><br /><input type="button" value="Login" style="width:50%" onkeydown="alert(e.keyCode)" onclick="admin.verify()"></div>
 	<div class="mask"></div>
 
 	<script src="./js/admin.js"></script>
