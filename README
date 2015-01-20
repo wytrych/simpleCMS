@@ -6,10 +6,11 @@ Features:
 
 * Blog posting system with a super-fast and simple markup language
 * A commenting system
-* Admin panel for adding/deleting posts
+* Admin panel for adding/editing/deleting posts
 
 Not yet there:
 
+* Fix some IE issues
 * Editing/deleting comments
 * Presentation/templating system
 * Security

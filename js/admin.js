@@ -85,8 +85,9 @@ var admin = function(){
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-						splitBlogContent(xmlhttp.response[1].split("@"));
-						document.querySelector("main").innerHTML = xmlhttp.response[0];
+						var response = (xmlhttp.response) ? xmlhttp.response : JSON.parse(xmlhttp.responseText);
+						splitBlogContent(response[1].split("@"));
+						document.querySelector("main").innerHTML = response[0];
 						addEditLink();
 						addNewPostLink();
 
@@ -120,7 +121,9 @@ var admin = function(){
 
 			xmlhttp.onreadystatechange = function() {	
 				if(xmlhttp.readyState==4 && xmlhttp.status==200) {
-					if (xmlhttp.response.ok) {
+					var verified = (xmlhttp.response) ? xmlhttp.response : JSON.parse(xmlhttp.responseText);
+					console.log(verified.ok);
+					if (verified.ok) {
 						addEditLink();
 						addNewPostLink();
 						removeDialog();
