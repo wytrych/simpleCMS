@@ -124,6 +124,10 @@ var admin = function(){
 			xmlhttp.onreadystatechange = function() {	
 				if(xmlhttp.readyState==4 && xmlhttp.status==200) {
 					var verified = (xmlhttp.response) ? xmlhttp.response : JSON.parse(xmlhttp.responseText);
+
+					if (typeof verified !== "object")
+						verified = JSON.parse(verified);
+
 					if (verified.ok) {
 						addEditLink();
 						addNewPostLink();
