@@ -1,14 +1,9 @@
 <?php
 
-include("./modules/PostLoader.php");
-include("./modules/NavGenerator.php");
+require_once("./view/PostLoader.php");
+require_once("./view/NavGenerator.php");
 
 $postLoader = new PostLoader();
-$content = $postLoader->load();
 
-$output = NavGenerator::generateNav($postLoader->headlines)."\n".$content;
-$wholefile = $postLoader->wholefile;
+echo(json_encode(array(NavGenerator::generateNav($postLoader->headlines), $postLoader->mainContent, $postLoader->wholefile)));
 
-echo(json_encode(array($output,$wholefile)));
-
-?>

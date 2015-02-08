@@ -1,71 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Yet Another Weblog</title>
-<meta charset="utf-8" />
-<meta name=viewport content="width=device-width, initial-scale=1" />
-<link href='http://fonts.googleapis.com/css?family=Quicksand:700|PT+Sans+Caption' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="./css/style.css" />
-</head>
-
-<body>
-<div class="bg">&lt;/</div>
-
-<main class="content">
-
 <?php
+
+/*
+ * This is the front page.
+ * 
+ * We load all modules and build the skeleton of the site.
+ *
+ * The boolean true passed to PostLoader and NavGenerator indicate, that we need <nav /> and <main /> tags. We won't need them to update the content, as we will be accessing them using querySelector in js/admin.js.
+ *
+ * @package simpleCMS
+ *
+ */
+
+require_once('./view/Header.php');
+require_once('./view/PostLoader.php');
+require_once('./view/NavGenerator.php');
+require_once('./modules/AdminPanelVerifier.php');
+require_once('./view/Footer.php');
 
 date_default_timezone_set('UTC');
 
-$loginDialog = false;
-
-if (isset($_GET['secretCode']) && intval($_GET['secretCode'])===intval(date('dmy'))) {
-	$loginDialog = true;
+if (!file_exists('./content/comments.xml') || !file_exists('./content/blog.txt')) { //Create the content files if we don't have them
+	require_once('./modules/Init.php');
+	Init::start();
 }
 
-/*if ($loginDialog) {
-?>
+$postLoader = new PostLoader(true);
 
-<div class="post" id="newPost">
-<p class="date" style="display:none"></p>
-<article><p class="addNew"><a href="#0" onclick="admin.edit('newPost')">Add new</a></p></article>
-</div>
+echo Header::build();
+echo NavGenerator::generateNav($postLoader->headlines,true);
+echo $postLoader->mainContent;
 
-<?php
-}*/
+AdminPanelVerifier::verify(); //Check if Admin mode was invoked
 
-include("./modules/PostLoader.php");
-include("./modules/NavGenerator.php");
-include("./modules/Init.php");
-
-Init::start();
-
-$postLoader = new PostLoader();
-$content =  $postLoader->load();
-
-echo NavGenerator::generateNav($postLoader->headlines);
-echo $content;
-
-?>
-</main>
-<script>
-var wholefile = <?php echo(json_encode(array($postLoader->wholefile)));?>[0].split("@");
-</script><?php
+echo Footer::build($postLoader->wholefile);
 
 
-if ($loginDialog) {
-?>
-	<div class="login"><input type="text" id="login" autofocus></input><br /><input type="password" id="pwd"></input><br /><input type="button" value="Login" style="width:50%" onclick="admin.verify()"></div>
-	<div class="mask"></div>
-
-	<script src="./js/admin.js"></script>
-
-<?php
-}
-
-
-	?>
-
-<script src="./js/script.js"></script>
-</body>
-</html>

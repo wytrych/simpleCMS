@@ -14,7 +14,7 @@ var admin = function(){
 	function addEditLink() {
 		var posts = document.querySelectorAll(".post");
 		for (var i = 0; i<posts.length; i++) {
-			var post = posts[i].querySelector(".date");
+			var post = posts[i].querySelector("time");
 			var editLink = document.createElement("p");
 			editLink.innerHTML = "<a href=\"#0\" onclick=\"admin.edit(\'"+posts[i].id+"\')\">Edit</a>&nbsp;|&nbsp;" +
 						"<a href=\"#0\" onclick=\"admin.deletePost(\'"+posts[i].id+"\')\">Delete</a>";
@@ -26,7 +26,7 @@ var admin = function(){
 		addDialog = document.createElement("div");
 		addDialog.className = "post";
 		addDialog.id = "newPost";
-		addDialog.innerHTML = "<p class=\"date\" style=\"display:none\"></p><article style=\"max-height:300em\"><p class=\"addNew\"><a href=\"#0\" onclick=\"admin.edit('newPost')\">Add new</a></p></article>";
+		addDialog.innerHTML = "<time style=\"display:none\"></time><article style=\"max-height:300em\"><p class=\"addNew\"><a href=\"#0\" onclick=\"admin.edit('newPost')\">Add new</a></p></article>";
 		document.querySelector("main").insertBefore(addDialog,document.querySelector("main").firstChild);
 	}
 
@@ -86,8 +86,10 @@ var admin = function(){
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 						var response = (xmlhttp.response) ? xmlhttp.response : JSON.parse(xmlhttp.responseText);
-						splitBlogContent(response[1].split("@"));
-						document.querySelector("main").innerHTML = response[0];
+						splitBlogContent(response[2].split("@"));
+						document.querySelector("nav").innerHTML = response[0];
+						document.querySelector("main").innerHTML = response[1];
+						console.log(response);
 						addEditLink();
 						addNewPostLink();
 

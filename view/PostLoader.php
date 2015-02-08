@@ -15,6 +15,8 @@ class PostLoader {
 
 	public $headlines = array();
 
+	public $mainContent = "";
+
 	private $articleFooter = "";
 
 	public function setFooter($content = "") {
@@ -27,7 +29,7 @@ class PostLoader {
 		<div class="obscurator"></div>
 EOD;
 
-		$this->articleFooter = $footer."</article>\n\n<div class=\"expand\" onclick=\"comments.expand(this)\">Read on <b>&darr;</b></div>\n</div>\n\n";
+		$this->articleFooter = "$footer</article>\n\n<div class=\"expand\" onclick=\"comments.expand(this)\">Read on <b>&darr;</b></div>\n</div>\n\n";
 	}
 
 
@@ -99,7 +101,7 @@ EOD;
 		return "";
 	}
 
-	public function load($postNumber = 10000) {	
+	public function load($postNumber = 10000,$skeleton = false) {	
 
 		if (!file_exists("./content/blog.txt")) {
 			?><h1>Blog files doesnt exists!</h1><?php
@@ -114,7 +116,6 @@ EOD;
 		$current = 0;
 		$counter = 0;
 		$lineCount = 0;
-		$finalOutput = "";
 
 		$file = @fopen("./content/blog.txt","r");	
 
@@ -135,7 +136,7 @@ EOD;
 					if (($a = (++$counter > $postNumber)) || $current != 0 || $b === -1) {
 						$output .= $this->articleFooter;
 						if ($a || $b === -1) {
-							$finalOutput .= $output;
+							$this->mainContent .= $output;
 							break;
 						}
 					}
@@ -144,9 +145,9 @@ EOD;
 					$current = $split[1];
 					$output .= "<div class=\"post\" id=\"p"
 						.$current
-						."\">\n<article>\n<header>\n<p class=\"date\"><time>"
+						."\">\n<article>\n<header>\n<time>"
 						.$split[2]
-						."</time></p>\n<h1>"
+						."</time>\n<h1>"
 						.$split[3]
 						."</h1>\n</header>\n";
 
@@ -195,20 +196,23 @@ EOD;
 					$output = $this->resetList()."<pre>\n<code>\n".$output."</code>\n</pre>\n";
 				}
 
-				$finalOutput .= $output;
+				$this->mainContent .= $output;
 		
 			}
 			fclose($file);
 		}
 
 		if ($lineCount < 2)
-			$finalOutput = "<div class=\"post\"><article><p class=\"date\" style=\"display:none\"></p><h1>The blog file does not have any content!</h1></article></div>";
+			$this->mainContent = "<div class=\"post\"><article><time style=\"display:none\"></time><h1>The blog file does not have any content!</h1></article></div>";
 
-		return $finalOutput;
+		if ($skeleton)
+			$this->mainContent = "<main>$this->mainContent</main>";
+
 	}
 
-	public function __construct() {
+	public function __construct($skeleton = false) {
 		$this->setFooter();
+		$this->load(10000,$skeleton);
 	}
 }
 ?>
