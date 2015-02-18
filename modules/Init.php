@@ -3,9 +3,9 @@
 class Init {
 	public static function start() {
 		if (!file_exists('./content/comments.xml')) {
-			$init = '<?xml version="1.0" encoding="utf-8"?>\n'
-				.'<comments>\n'
-				.'<counter>0</counter>\n'
+			$init = '<?xml version="1.0" encoding="utf-8"?>'
+				.'<comments>'
+				.'<counter>0</counter>'
 				.'</comments>';
 			$file = fopen('./content/comments.xml',"w");
 			if ($file)
