@@ -1,4 +1,4 @@
-**Discountinued**
+**DISCONTINUED**
 
 This is a simple Content Management System.
 
